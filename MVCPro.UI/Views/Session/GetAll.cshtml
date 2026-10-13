@@ -1,0 +1,83 @@
+﻿@model MVCPro.BLL.Helpers.PaginatedList<MVCPro.BLL.ViewModels.SessionVM>
+@{
+    ViewData["Title"] = "Sessions";
+}
+
+<div class="container mt-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-primary">📅 All Sessions</h2>
+        <a class="btn btn-success shadow-sm" asp-action="Create">
+            <i class="bi bi-plus-circle"></i> Add New Session
+        </a>
+    </div>
+
+    <!-- Sessions Table -->
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Title</th>
+                            <th>Course</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Location</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var s in Model)
+                        {
+                            <tr>
+                                <td class="fw-semibold">@s.Title</td>
+                                <td>@s.CourseName</td>
+                                <td>
+                                    <span class="badge bg-primary">
+                                        @s.StartDate.ToString("dd/MM/yyyy HH:mm")
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-secondary">
+                                        @s.EndDate.ToString("dd/MM/yyyy HH:mm")
+                                    </span>
+                                </td>
+                                <td>@s.Location</td>
+                                <td class="text-center">
+                                    <a class="btn btn-sm btn-outline-warning me-1" asp-action="Update" asp-route-id="@s.Id">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@s.Id"
+                                       onclick="return confirm('Are you sure you want to delete this session?');">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+                <a class="page-link" asp-action="GetAll" asp-route-pageIndex="@(Model.PageIndex - 1)">Previous</a>
+            </li>
+
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                    <a class="page-link" asp-action="GetAll" asp-route-pageIndex="@i">@i</a>
+                </li>
+            }
+
+            <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+                <a class="page-link" asp-action="GetAll" asp-route-pageIndex="@(Model.PageIndex + 1)">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>

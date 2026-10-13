@@ -1,0 +1,53 @@
+﻿@model MVCPro.BLL.ViewModels.UpdateGradeVM
+
+@{
+    ViewData["Title"] = Model.Id > 0 ? "Update Grade" : "Add Grade";
+}
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <form asp-action="@((Model.Id > 0) ? "Update" : "Create")" method="post">
+        @Html.AntiForgeryToken()   
+
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="UserId" class="form-label"></label>
+            <select asp-for="UserId" class="form-select" asp-items="ViewBag.Users">
+                <option value="">-- Select User --</option>
+            </select>
+            <span asp-validation-for="UserId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CourseId" class="form-label"></label>
+            <select asp-for="CourseId" class="form-select" asp-items="ViewBag.Courses">
+                <option value="">-- Select Course --</option>
+            </select>
+            <span asp-validation-for="CourseId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Score" class="form-label"></label>
+            <input asp-for="Score" class="form-control" type="number" min="0" max="100" />
+            <span asp-validation-for="Score" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Remarks" class="form-label"></label>
+            <select asp-for="Remarks" class="form-select" asp-items="ViewBag.Remarks">
+                <option value="">-- Select Remark --</option>
+            </select>
+            <span asp-validation-for="Remarks" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-action="GetAll" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,124 @@
+﻿@model MVCPro.BLL.Helpers.PaginatedList<MVCPro.BLL.ViewModels.CourseVM>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold text-primary">📚 Courses List</h2>
+    <a asp-action="Create" class="btn btn-success shadow-sm">
+        <i class="bi bi-plus-circle"></i> Create New Course
+    </a>
+</div>
+
+<!-- Search & Filter Section -->
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <form asp-action="GetAll" method="get" class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Search by Name</label>
+                <input type="text" name="name" value="@ViewBag.SearchName" placeholder="Enter course name..." class="form-control" />
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Category</label>
+                <select name="category" class="form-select" asp-items="ViewBag.AllCategories">
+                    <option value="">All Categories</option>
+                </select>
+            </div>
+
+            <div class="col-md-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary shadow-sm flex-fill">
+                    <i class="bi bi-search"></i> Search
+                </button>
+                <a asp-action="GetAll" class="btn btn-outline-secondary shadow-sm flex-fill">
+                    <i class="bi bi-arrow-counterclockwise"></i> Reset
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Courses Table -->
+<div class="card shadow-lg">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Course Id</th>
+                        <th>Course Name</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Instructor</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model)
+                    {
+                        <tr>
+                            <td><span class="fw-bold">#@course.Id</span></td>
+                            <td>@course.Name</td>
+                            <td class="text-muted">@course.Description</td>
+                            <td>
+                                <span class="badge bg-info text-dark">@course.Category</span>
+                            </td>
+                            <td>@(course.StartDate?.ToString("dd MMM yyyy") ?? "-")</td>
+                            <td>@(course.EndDate?.ToString("dd MMM yyyy") ?? "-")</td>
+                            <td>@course.InstructorName</td>
+                            <td class="text-center">
+                                <a asp-controller="Course" asp-action="Details" asp-route-id="@course.Id"
+                                   class="btn btn-sm btn-outline-info me-1">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a asp-controller="Course" asp-action="Update" asp-route-id="@course.Id"
+                                   class="btn btn-sm btn-outline-warning me-1">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a asp-controller="Course" asp-action="Delete" asp-route-id="@course.Id"
+                                   class="btn btn-sm btn-outline-danger"
+                                   onclick="return confirm('Are you sure you want to delete this course?');">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Pagination -->
+@if (Model is MVCPro.BLL.Helpers.PaginatedList<MVCPro.BLL.ViewModels.CourseVM> paginated)
+{
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(paginated.HasPreviousPage ? "" : "disabled")">
+                <a class="page-link" asp-action="GetAll"
+                   asp-route-name="@ViewBag.SearchName"
+                   asp-route-category="@ViewBag.SelectedCategory"
+                   asp-route-pageIndex="@(paginated.PageIndex - 1)"
+                   asp-route-pageSize="@ViewBag.PageSize">Previous</a>
+            </li>
+
+            @for (int i = 1; i <= paginated.TotalPages; i++)
+            {
+                <li class="page-item @(i == paginated.PageIndex ? "active" : "")">
+                    <a class="page-link" asp-action="GetAll"
+                       asp-route-name="@ViewBag.SearchName"
+                       asp-route-category="@ViewBag.SelectedCategory"
+                       asp-route-pageIndex="@i"
+                       asp-route-pageSize="@ViewBag.PageSize">@i</a>
+                </li>
+            }
+
+            <li class="page-item @(paginated.HasNextPage ? "" : "disabled")">
+                <a class="page-link" asp-action="GetAll"
+                   asp-route-name="@ViewBag.SearchName"
+                   asp-route-category="@ViewBag.SelectedCategory"
+                   asp-route-pageIndex="@(paginated.PageIndex + 1)"
+                   asp-route-pageSize="@ViewBag.PageSize">Next</a>
+            </li>
+        </ul>
+    </nav>
+}

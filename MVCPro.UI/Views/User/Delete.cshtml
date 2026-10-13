@@ -1,0 +1,8 @@
+﻿@model MVCPro.BLL.ViewModels.UserVM
+<h2>Delete User</h2>
+<div class="alert alert-danger">Are you sure to delete @Model.FullName ?</div>
+<form asp-action="ConfirmDelete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button class="btn btn-danger">Delete</button>
+    <a asp-action="GetAll" class="btn btn-secondary">Cancel</a>
+</form>

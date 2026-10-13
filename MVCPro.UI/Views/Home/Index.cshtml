@@ -1,0 +1,163 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Hero Section -->
+<div class="text-white text-center py-5 hero-section">
+    <h1 class="display-3 fw-bold mb-3 animate__animated animate__fadeInDown">
+        Welcome to <span class="text-warning">MVCPro Courses</span>
+    </h1>
+    <p class="lead mb-4 animate__animated animate__fadeInUp animate__delay-1s">
+        Upgrade your skills in Programming, AI, Design, and Business 🚀
+    </p>
+    <a class="btn btn-warning btn-sm px-3 py-2 shadow rounded-pill animate__animated animate__zoomIn animate__delay-2s"
+       asp-controller="Course" asp-action="GetAll">
+        <i class="bi bi-book-half"></i> Browse Courses
+    </a>
+</div>
+
+<!-- Popular Courses -->
+<section class="container my-5">
+    <h2 class="mb-5 text-center fw-bold text-gradient">🌟 Our Popular Courses</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+        <div class="col">
+            <div class="card h-100 shadow-lg border-0 rounded-4 course-card">
+                <img src="https://img.icons8.com/color/96/c-sharp-logo.png" class="card-img-top p-4" alt="C#">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">C# Programming</h5>
+                    <p class="text-muted">Learn OOP & modern app development with C#.</p>
+                </div>
+                <div class="card-footer bg-light text-center fw-bold text-primary">👨‍🏫 Abdalla Essa</div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 shadow-lg border-0 rounded-4 course-card">
+                <img src="https://img.icons8.com/color/96/artificial-intelligence.png" class="card-img-top p-4" alt="AI">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">AI & Robotics</h5>
+                    <p class="text-muted">Discover the power of Artificial Intelligence & Robotics.</p>
+                </div>
+                <div class="card-footer bg-light text-center fw-bold text-primary">🤖 Ahmed Taha</div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 shadow-lg border-0 rounded-4 course-card">
+                <img src="https://img.icons8.com/color/96/design--v1.png" class="card-img-top p-4" alt="UI/UX">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">UI/UX Design</h5>
+                    <p class="text-muted">Master modern UI/UX principles & prototyping.</p>
+                </div>
+                <div class="card-footer bg-light text-center fw-bold text-primary">🎨 Alaa Hakim</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats -->
+<section class="stats-section py-5">
+    <div class="container text-center text-white">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <h2 class="fw-bold">50+</h2>
+                <p>Available Courses</p>
+            </div>
+            <div class="col-md-4">
+                <h2 class="fw-bold">1200+</h2>
+                <p>Active Students</p>
+            </div>
+            <div class="col-md-4">
+                <h2 class="fw-bold">30+</h2>
+                <p>Expert Instructors</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="container my-5">
+    <h2 class="mb-5 text-center fw-bold text-gradient">💬 What Our Students Say</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+        <div class="col">
+            <div class="card shadow border-0 rounded-4 p-3 h-100 testimonial-card">
+                <div class="card-body text-center">
+                    <p class="fst-italic">"This platform helped me master C# in no time!"</p>
+                    <h6 class="fw-bold text-primary mt-3">– Mohamed Ali</h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card shadow border-0 rounded-4 p-3 h-100 testimonial-card">
+                <div class="card-body text-center">
+                    <p class="fst-italic">"UI/UX course landed me a job. Totally worth it!"</p>
+                    <h6 class="fw-bold text-primary mt-3">– Sara Ahmed</h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card shadow border-0 rounded-4 p-3 h-100 testimonial-card">
+                <div class="card-body text-center">
+                    <p class="fst-italic">"AI & Robotics opened new career opportunities!"</p>
+                    <h6 class="fw-bold text-primary mt-3">– Youssef Hassan</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<div class="cta-section text-center py-5 text-white">
+    <h2 class="fw-bold mb-3">Ready to Start Your Journey?</h2>
+    <a asp-controller="Course" asp-action="GetAll" class="btn btn-light btn-lg rounded-pill px-5">
+        Join Now 🚀
+    </a>
+</div>
+
+<!-- Custom CSS -->
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #007bff 0%, #6610f2 100%);
+        min-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .course-card {
+        transition: all 0.3s ease-in-out;
+    }
+
+        .course-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+        }
+
+    .stats-section {
+        background: linear-gradient(135deg, #6610f2 0%, #007bff 100%);
+    }
+
+    .testimonial-card {
+        transition: all 0.3s ease-in-out;
+    }
+
+        .testimonial-card:hover {
+            transform: scale(1.05);
+        }
+
+    .text-gradient {
+        color: #007bff;
+       
+    }
+
+    .cta-section {
+        background: linear-gradient(135deg, #6610f2 0%, #007bff 100%);
+    }
+</style>
+
+<!-- Animate.css (for animations) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />

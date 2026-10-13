@@ -1,0 +1,41 @@
+﻿@model MVCPro.BLL.ViewModels.UpdateUserVM
+
+<div class="container mt-4">
+    <h2>@(Model.Id == 0 ? "Add User" : "Edit User")</h2>
+
+    <form asp-action="@(Model.Id == 0 ? "Create" : "Update")" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="FName" class="form-label"></label>
+            <input asp-for="FName" class="form-control" />
+            <span asp-validation-for="FName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="LName" class="form-label"></label>
+            <input asp-for="LName" class="form-control" />
+            <span asp-validation-for="LName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Role"></label>
+            <select asp-for="Role" class="form-select" asp-items="ViewBag.Roles">
+                <option value="">-- Select Role --</option>
+            </select>
+            <span asp-validation-for="Role" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-action="GetAll" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
